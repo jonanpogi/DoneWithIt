@@ -1,5 +1,7 @@
 import React from "react";
-import { Image, ImageBackground, StyleSheet, Text, View } from "react-native";
+import { Image, ImageBackground, StyleSheet, View } from "react-native";
+import AppButton from "../components/AppButton";
+import AppText from "../components/AppText";
 
 import colors from "../config/colors";
 
@@ -7,6 +9,7 @@ const WelcomeScreen = () => {
     return (
         <React.Fragment>
             <ImageBackground
+                blurRadius={5}
                 style={styles.backgroundImage}
                 source={require(`../assets/background.jpg`)}
             >
@@ -15,21 +18,31 @@ const WelcomeScreen = () => {
                         style={styles.logoImage}
                         source={require(`../assets/logo-red.png`)}
                     />
-                    <Text style={styles.text}>
+                    <AppText style={styles.text}>
                         Sell anything you are done with.
-                    </Text>
+                    </AppText>
                 </View>
-
-                {[colors.primary, colors.secondary].map((item, index) => (
-                    <View
-                        key={index}
-                        style={
-                            index === 0
-                                ? styles.loginButton(item)
-                                : styles.registerButton(item)
-                        }
-                    />
-                ))}
+                <View style={styles.buttonContainer}>
+                    {[
+                        {
+                            title: "login",
+                            color: colors.primary,
+                            onPress: () => alert("login"),
+                        },
+                        {
+                            title: "register",
+                            color: colors.secondary,
+                            onPress: () => alert("register"),
+                        },
+                    ].map((object, index) => (
+                        <AppButton
+                            key={index}
+                            title={object.title}
+                            color={object.color}
+                            onPress={object.onPress}
+                        />
+                    ))}
+                </View>
             </ImageBackground>
         </React.Fragment>
     );
@@ -41,11 +54,10 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end",
         alignItems: "center",
     },
-    loginButton: (item) => ({
-        backgroundColor: item,
+    buttonContainer: {
+        padding: 20,
         width: "100%",
-        height: 70,
-    }),
+    },
     logoContainer: {
         position: "absolute",
         top: 100,
@@ -56,13 +68,10 @@ const styles = StyleSheet.create({
         height: 100,
         width: 100,
     },
-    registerButton: (item) => ({
-        backgroundColor: item,
-        width: "100%",
-        height: 70,
-    }),
     text: {
         paddingTop: 100,
+        fontSize: 20,
+        fontWeight: "bold",
     },
 });
 

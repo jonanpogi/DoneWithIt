@@ -1,18 +1,27 @@
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
 import colors from "../config/colors";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 function ViewImageScreen(props) {
     return (
         <View style={styles.container}>
-            {[colors.primary, colors.secondary].map((item, index) => (
-                <View
+            {[
+                {
+                    icon: "close",
+                    style: styles.cancelButton,
+                },
+                {
+                    icon: "trash-can-outline",
+                    style: styles.deleteButton,
+                },
+            ].map((object, index) => (
+                <MaterialCommunityIcons
                     key={index}
-                    style={
-                        index === 0
-                            ? styles.cancelButton(item)
-                            : styles.deleteButton(item)
-                    }
+                    name={object.icon}
+                    size={50}
+                    style={object.style}
+                    color="white"
                 />
             ))}
             <Image
@@ -25,26 +34,20 @@ function ViewImageScreen(props) {
 }
 
 const styles = StyleSheet.create({
-    cancelButton: (item) => ({
-        backgroundColor: item,
-        width: 50,
-        height: 50,
+    cancelButton: {
         position: "absolute",
         top: 40,
         left: 30,
-    }),
+    },
     container: {
         backgroundColor: colors.black,
         flex: 1,
     },
-    deleteButton: (item) => ({
-        backgroundColor: item,
-        width: 50,
-        height: 50,
+    deleteButton: {
         position: "absolute",
         top: 40,
         right: 30,
-    }),
+    },
     image: {
         width: "100%",
         height: "100%",
