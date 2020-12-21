@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Image, TouchableHighlight } from "react-native";
 import AppText from "../AppText";
 import Swipeable from "react-native-gesture-handler/Swipeable";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import colors from "../../config/colors";
 
@@ -12,6 +13,7 @@ function AppListItem({
     IconComponent,
     onPress,
     renderRightActions,
+    showChevrons,
 }) {
     return (
         <Swipeable renderRightActions={renderRightActions}>
@@ -20,13 +22,22 @@ function AppListItem({
                     {IconComponent}
                     {image && <Image source={image} style={styles.image} />}
                     <View style={styles.listContainer}>
-                        <AppText style={styles.title}>{title}</AppText>
+                        <AppText style={styles.title} numberOfLines={1}>
+                            {title}
+                        </AppText>
                         {subTitle && (
-                            <AppText style={styles.subTitle}>
+                            <AppText style={styles.subTitle} numberOfLines={2}>
                                 {subTitle}
                             </AppText>
                         )}
                     </View>
+                    {showChevrons && (
+                        <MaterialCommunityIcons
+                            color={colors.medium}
+                            name="chevron-right"
+                            size={20}
+                        />
+                    )}
                 </View>
             </TouchableHighlight>
         </Swipeable>
@@ -38,6 +49,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         padding: 10,
         backgroundColor: colors.white,
+        alignItems: "center",
     },
     image: {
         width: 50,
@@ -52,6 +64,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     listContainer: {
+        flex: 1,
         marginLeft: 10,
         justifyContent: "center",
     },
