@@ -13,6 +13,7 @@ import defaultStyles from "../config/styles";
 import AppText from "./AppText";
 import AppBlankScreen from "./AppBlankScreen";
 import AppPickerItem from "./AppPickerItem";
+import colors from "../config/colors";
 
 function AppPicker({ icon, onSelectedItem, items, placeholder, selectedItem }) {
     const [modalVisible, setModalVisible] = useState(false);
@@ -29,7 +30,9 @@ function AppPicker({ icon, onSelectedItem, items, placeholder, selectedItem }) {
                             style={styles.icon}
                         />
                     )}
-                    <AppText style={styles.text}>
+                    <AppText
+                        style={selectedItem ? styles.text : styles.placeholder}
+                    >
                         {selectedItem ? selectedItem.label : placeholder}
                     </AppText>
                     <MaterialCommunityIcons
@@ -77,6 +80,10 @@ const styles = StyleSheet.create({
     },
     icon: {
         marginRight: 10,
+    },
+    placeholder: {
+        flex: 1,
+        color: colors.medium,
     },
     text: {
         flex: 1,
