@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
-import AppListItem from "../components/AppListItem";
+import AppListItem from "../components/lists/AppListItem";
 import AppBlankScreen from "../components/AppBlankScreen";
-import AppListSeparator from "../components/AppListSeparator";
-import AppListItemDeleteAction from "../components/AppListItemDeleteAction";
+import AppListSeparator from "../components/lists/AppListSeparator";
+import AppListItemDeleteAction from "../components/lists/AppListItemDeleteAction";
 
 const messages = [
     {
