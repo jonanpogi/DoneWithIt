@@ -9,11 +9,12 @@ import {
 } from "../components/forms";
 import * as Yup from "yup";
 import colors from "../config/colors";
+import AppCategoryPickerItem from "../components/forms/AppCategoryPickerItem";
 
 const initialItems = [
-    { label: "test1", value: 1 },
-    { label: "test2", value: 2 },
-    { label: "test3", value: 3 },
+    { label: "test1", value: 1, backgroundColor: "red", icon: "apps" },
+    { label: "test2", value: 2, backgroundColor: "green", icon: "email" },
+    { label: "test3", value: 3, backgroundColor: "yellow", icon: "lock" },
 ];
 
 const validationSchema = Yup.object().shape({
@@ -52,12 +53,16 @@ function ListingEditScreen(props) {
                     name="price"
                     placeholder="Price"
                     textContentType="none"
+                    width={120}
                 />
 
                 <AppFormPicker
                     name="category"
+                    numColumns={3}
                     items={initialItems}
+                    PickerItemComponent={AppCategoryPickerItem}
                     placeholder="Category"
+                    width={"50%"}
                 />
 
                 <AppFormField
