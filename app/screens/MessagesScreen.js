@@ -54,6 +54,7 @@ function MessagesScreen(props) {
                                 onPress={() => handleDeleteItem(item.id)}
                             />
                         )}
+                        showChevrons={true}
                     />
                 )}
                 ItemSeparatorComponent={() => <AppListSeparator />}
