@@ -9,7 +9,7 @@ import {
 } from "../components/forms";
 import * as Yup from "yup";
 import colors from "../config/colors";
-import AppCategoryPickerItem from "../components/forms/AppCategoryPickerItem";
+import AppCategoryPickerItem from "../components/AppCategoryPickerItem";
 
 const initialItems = [
     { label: "test1", value: 1, backgroundColor: "red", icon: "apps" },
