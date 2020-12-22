@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import AppIcon from "../AppIcon";
-import AppText from "../AppText";
+import AppIcon from "./AppIcon";
+import AppText from "./AppText";
 
 function AppCategoryPickerItem({ item, onPress }) {
     return (
