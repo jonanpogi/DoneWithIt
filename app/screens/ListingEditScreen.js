@@ -4,12 +4,14 @@ import { StyleSheet } from "react-native";
 import {
     AppForm,
     AppFormField,
+    AppFormImagePicker,
     AppFormPicker,
     AppSubmitButton,
 } from "../components/forms";
 import * as Yup from "yup";
 import colors from "../config/colors";
 import AppCategoryPickerItem from "../components/AppCategoryPickerItem";
+import useLocation from "../hooks/useLocation";
 
 const initialItems = [
     { label: "test1", value: 1, backgroundColor: "red", icon: "apps" },
@@ -22,21 +24,26 @@ const validationSchema = Yup.object().shape({
     price: Yup.string().required().min(1).max(10000).label("Price"),
     category: Yup.object().nullable(true).required().label("Category"),
     description: Yup.string().optional().label("Description"),
+    images: Yup.array().min(1, "Please select one image."),
 });
 
 function ListingEditScreen(props) {
+    const location = useLocation();
+
     return (
         <AppBlankScreen style={styles.container}>
             <AppForm
                 initialValues={{
+                    images: [],
                     title: "",
                     price: "",
                     category: null,
                     description: "",
                 }}
-                onSubmit={(values) => console.log(values)}
+                onSubmit={(values) => console.log(location)}
                 validationSchema={validationSchema}
             >
+                <AppFormImagePicker name="images" />
                 <AppFormField
                     maxLength={255}
                     autoCaptilize="none"
