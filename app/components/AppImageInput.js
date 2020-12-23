@@ -21,7 +21,6 @@ function AppImageInput({ imageUri, onChangeImage }) {
             Permission.CAMERA,
             Permission.LOCATION
         );
-        console.log(granted ? "trueee" : "falsy");
     };
 
     const handlePress = () => {
