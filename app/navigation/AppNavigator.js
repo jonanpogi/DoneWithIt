@@ -25,7 +25,7 @@ export default TabNavigator = () => (
             }}
         />
         <Tab.Screen
-            name="ListingEditScreen"
+            name={routes.LISTING_EDIT_SCREEN}
             component={ListingEditScreen}
             options={({ navigation }) => ({
                 tabBarButton: () => (
