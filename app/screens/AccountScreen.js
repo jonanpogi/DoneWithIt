@@ -6,6 +6,7 @@ import AppIcon from "../components/AppIcon";
 import AppListSeparator from "../components/lists/AppListSeparator";
 
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
 const menuItems = [
     {
@@ -14,6 +15,7 @@ const menuItems = [
             name: "format-list-bulleted",
             backgroundColor: colors.primary,
         },
+        targetScreen: routes.MESSAGES_SCREEN,
     },
     {
         title: "My Messages",
@@ -21,6 +23,7 @@ const menuItems = [
             name: "email",
             backgroundColor: colors.secondary,
         },
+        targetScreen: routes.MESSAGES_SCREEN,
     },
     {
         title: "Log Out",
@@ -28,10 +31,11 @@ const menuItems = [
             name: "logout",
             backgroundColor: colors.warning,
         },
+        targetScreen: routes.MESSAGES_SCREEN,
     },
 ];
 
-function AccountScreen(props) {
+function AccountScreen({ navigation }) {
     return (
         <AppBlankScreen style={styles.screen}>
             <View style={styles.container}>
@@ -53,6 +57,7 @@ function AccountScreen(props) {
                                 backgroundColor={item.icon.backgroundColor}
                             />
                         }
+                        onPress={() => navigation.navigate(item.targetScreen)}
                     />
                 )}
                 ItemSeparatorComponent={AppListSeparator}
