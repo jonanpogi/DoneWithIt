@@ -4,8 +4,9 @@ import AppButton from "../components/AppButton";
 import AppText from "../components/AppText";
 
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }) => {
     return (
         <React.Fragment>
             <ImageBackground
@@ -27,12 +28,14 @@ const WelcomeScreen = () => {
                         {
                             title: "login",
                             color: colors.primary,
-                            onPress: () => alert("login"),
+                            onPress: () =>
+                                navigation.navigate(routes.LOGIN_SCREEN),
                         },
                         {
                             title: "register",
                             color: colors.secondary,
-                            onPress: () => alert("register"),
+                            onPress: () =>
+                                navigation.navigate(routes.REGISTER_SCREEN),
                         },
                     ].map((object, index) => (
                         <AppButton
