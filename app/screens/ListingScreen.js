@@ -3,6 +3,7 @@ import { FlatList, StyleSheet } from "react-native";
 import AppBlankScreen from "../components/AppBlankScreen";
 import AppCard from "../components/AppCard";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
 const initialData = [
     {
@@ -13,25 +14,13 @@ const initialData = [
     },
     {
         id: 2,
-        title: "jacket",
+        title: "couch",
         price: "$200",
-        image: require(`../assets/jacket.jpg`),
-    },
-    {
-        id: 3,
-        title: "jacket",
-        price: "$200",
-        image: require(`../assets/jacket.jpg`),
-    },
-    {
-        id: 4,
-        title: "jacket",
-        price: "$200",
-        image: require(`../assets/jacket.jpg`),
+        image: require(`../assets/couch.jpg`),
     },
 ];
 
-function ListingScreen(props) {
+function ListingScreen({ navigation }) {
     const [data, setData] = useState(initialData);
     const [refreshing, setRefreshing] = useState(false);
 
@@ -45,6 +34,12 @@ function ListingScreen(props) {
                         title={item.title}
                         subTitle={item.price}
                         image={item.image}
+                        onPress={() =>
+                            navigation.navigate(
+                                routes.LISTING_DETAILS_SCREEN,
+                                item
+                            )
+                        }
                     />
                 )}
                 refreshing={refreshing}
