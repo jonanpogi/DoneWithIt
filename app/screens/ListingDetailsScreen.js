@@ -6,11 +6,11 @@ import AppListItem from "../components/lists/AppListItem";
 import colors from "../config/colors";
 
 function ListingDetailsScreen({ route }) {
-    const { title, price, image } = route.params;
+    const { title, price, images } = route.params;
 
     return (
         <View style={styles.container}>
-            <Image style={styles.image} source={image} />
+            <Image style={styles.image} source={{ uri: images[0].url }} />
             <View style={styles.detailsContainer}>
                 <AppText style={styles.title}>{title}</AppText>
                 <AppText style={styles.price}>{price}</AppText>
