@@ -5,9 +5,12 @@ import AppCard from "../components/AppCard";
 import colors from "../config/colors";
 import routes from "../navigation/routes";
 import listings from "../api/listings";
+import AppText from "../components/AppText";
+import AppButton from "../components/AppButton";
 
 function ListingScreen({ navigation }) {
     const [data, setData] = useState([]);
+    const [error, setError] = useState(undefined);
     const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
@@ -15,12 +18,31 @@ function ListingScreen({ navigation }) {
     }, []);
 
     const loadListings = async () => {
+        console.log("firedsss");
         const response = await listings.getListings();
-        setData(response.data);
+
+        if (!response.ok) {
+            setError(true);
+        } else {
+            setError(false);
+            setData(response.data);
+        }
     };
+
+    console.log(error);
 
     return (
         <AppBlankScreen style={styles.container}>
+            {error && (
+                <>
+                    <AppText>Couldn't retrieve the Feeds.</AppText>
+                    <AppButton
+                        title="retry"
+                        color={colors.primary}
+                        onPress={loadListings}
+                    />
+                </>
+            )}
             <FlatList
                 data={data}
                 keyExtractor={(item) => item.id.toString()}
@@ -38,9 +60,7 @@ function ListingScreen({ navigation }) {
                     />
                 )}
                 refreshing={refreshing}
-                onRefresh={() => {
-                    loadListings();
-                }}
+                onRefresh={loadListings}
             />
         </AppBlankScreen>
     );
