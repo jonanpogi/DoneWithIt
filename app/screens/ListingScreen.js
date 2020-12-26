@@ -18,7 +18,6 @@ function ListingScreen({ navigation }) {
     }, []);
 
     const loadListings = async () => {
-        console.log("firedsss");
         const response = await listings.getListings();
 
         if (!response.ok) {
@@ -28,8 +27,6 @@ function ListingScreen({ navigation }) {
             setData(response.data);
         }
     };
-
-    console.log(error);
 
     return (
         <AppBlankScreen style={styles.container}>
