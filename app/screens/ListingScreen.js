@@ -50,7 +50,7 @@ function ListingScreen({ navigation }) {
                     />
                 )}
                 refreshing={refreshing}
-                onRefresh={loadListings}
+                onRefresh={getListingsApi.request}
             />
         </AppBlankScreen>
     );
