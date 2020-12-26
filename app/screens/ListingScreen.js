@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import AppBlankScreen from "../components/AppBlankScreen";
 import AppCard from "../components/AppCard";
@@ -7,30 +7,22 @@ import routes from "../navigation/routes";
 import listings from "../api/listings";
 import AppText from "../components/AppText";
 import AppButton from "../components/AppButton";
+import AppActivityIndicator from "../components/AppActivityIndicator";
+import useApi from "../hooks/useApi";
+import { useState } from "react";
 
 function ListingScreen({ navigation }) {
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(undefined);
     const [refreshing, setRefreshing] = useState(false);
 
+    const getListingsApi = useApi(listings.getListings);
+
     useEffect(() => {
-        loadListings();
+        getListingsApi.request();
     }, []);
-
-    const loadListings = async () => {
-        const response = await listings.getListings();
-
-        if (!response.ok) {
-            setError(true);
-        } else {
-            setError(false);
-            setData(response.data);
-        }
-    };
 
     return (
         <AppBlankScreen style={styles.container}>
-            {error && (
+            {getListingsApi.error && (
                 <>
                     <AppText>Couldn't retrieve the Feeds.</AppText>
                     <AppButton
@@ -40,8 +32,9 @@ function ListingScreen({ navigation }) {
                     />
                 </>
             )}
+            <AppActivityIndicator visible={getListingsApi.loading} />
             <FlatList
-                data={data}
+                data={getListingsApi.data}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <AppCard
