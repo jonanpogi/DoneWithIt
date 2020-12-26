@@ -28,7 +28,7 @@ function ListingScreen({ navigation }) {
                     <AppButton
                         title="retry"
                         color={colors.primary}
-                        onPress={loadListings}
+                        onPress={getListingsApi.request}
                     />
                 </>
             )}
