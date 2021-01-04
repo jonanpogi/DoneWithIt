@@ -47,6 +47,7 @@ function ListingScreen({ navigation }) {
                                 item
                             )
                         }
+                        thumbnailUrl={item.images[0].thumbnailUrl}
                     />
                 )}
                 refreshing={refreshing}
