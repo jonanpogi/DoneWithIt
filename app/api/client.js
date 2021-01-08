@@ -1,4 +1,5 @@
 import { create } from "apisauce";
+import { getToken } from "../auth/storage";
 import cache from "../utility/cache";
 
 // online
@@ -8,6 +9,12 @@ const baseURL = "https://my-first-node-js-api.herokuapp.com/api";
 
 const apiClient = create({
     baseURL,
+});
+
+apiClient.addAsyncRequestTransform(async (request) => {
+    const authToken = await getToken();
+    if (!authToken) return;
+    request.headers["x-auth-token"] = authToken;
 });
 
 const get = apiClient.get;
