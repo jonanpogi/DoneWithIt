@@ -21,39 +21,41 @@ function ListingScreen({ navigation }) {
     }, []);
 
     return (
-        <AppBlankScreen style={styles.container}>
-            {getListingsApi.error && (
-                <>
-                    <AppText>Couldn't retrieve the Feeds.</AppText>
-                    <AppButton
-                        title="retry"
-                        color={colors.primary}
-                        onPress={getListingsApi.request}
-                    />
-                </>
-            )}
+        <>
             <AppActivityIndicator visible={getListingsApi.loading} />
-            <FlatList
-                data={getListingsApi.data}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                    <AppCard
-                        title={item.title}
-                        subTitle={item.price}
-                        imageUrl={item.images[0].url}
-                        onPress={() =>
-                            navigation.navigate(
-                                routes.LISTING_DETAILS_SCREEN,
-                                item
-                            )
-                        }
-                        thumbnailUrl={item.images[0].thumbnailUrl}
-                    />
+            <AppBlankScreen style={styles.container}>
+                {getListingsApi.error && (
+                    <>
+                        <AppText>Couldn't retrieve the Feeds.</AppText>
+                        <AppButton
+                            title="retry"
+                            color={colors.primary}
+                            onPress={getListingsApi.request}
+                        />
+                    </>
                 )}
-                refreshing={refreshing}
-                onRefresh={getListingsApi.request}
-            />
-        </AppBlankScreen>
+                <FlatList
+                    data={getListingsApi.data}
+                    keyExtractor={(item) => item.id.toString()}
+                    renderItem={({ item }) => (
+                        <AppCard
+                            title={item.title}
+                            subTitle={item.price}
+                            imageUrl={item.images[0].url}
+                            onPress={() =>
+                                navigation.navigate(
+                                    routes.LISTING_DETAILS_SCREEN,
+                                    item
+                                )
+                            }
+                            thumbnailUrl={item.images[0].thumbnailUrl}
+                        />
+                    )}
+                    refreshing={refreshing}
+                    onRefresh={getListingsApi.request}
+                />
+            </AppBlankScreen>
+        </>
     );
 }
 
