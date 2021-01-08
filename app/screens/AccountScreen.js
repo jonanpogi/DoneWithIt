@@ -7,6 +7,7 @@ import AppListSeparator from "../components/lists/AppListSeparator";
 
 import colors from "../config/colors";
 import routes from "../navigation/routes";
+import useAuth from "../auth/useAuth";
 
 const menuItems = [
     {
@@ -36,12 +37,14 @@ const menuItems = [
 ];
 
 function AccountScreen({ navigation }) {
+    const { user, logOut } = useAuth();
+
     return (
         <AppBlankScreen style={styles.screen}>
             <View style={styles.container}>
                 <AppListItem
-                    title="Jonan Bie"
-                    subTitle="jonan.bie@gmail.com"
+                    title={user.name}
+                    subTitle={user.email}
                     image={require(`../assets/mosh.jpg`)}
                 />
             </View>
@@ -57,7 +60,11 @@ function AccountScreen({ navigation }) {
                                 backgroundColor={item.icon.backgroundColor}
                             />
                         }
-                        onPress={() => navigation.navigate(item.targetScreen)}
+                        onPress={() => {
+                            item.title !== "Log Out"
+                                ? navigation.navigate(item.targetScreen)
+                                : logOut();
+                        }}
                     />
                 )}
                 ItemSeparatorComponent={AppListSeparator}
