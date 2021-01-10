@@ -6,49 +6,54 @@ import AccountNavigator from "./AccountNavigator";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import EditListingButton from "./EditListingButton";
 import routes from "./routes";
+import useNotifications from "../hooks/useNotifications";
 
 const Tab = createBottomTabNavigator();
 
-export default TabNavigator = () => (
-    <Tab.Navigator>
-        <Tab.Screen
-            name="Feed"
-            component={FeedNavigator}
-            options={{
-                tabBarIcon: ({ size, color }) => (
-                    <MaterialCommunityIcons
-                        name="home"
-                        size={size}
-                        color={color}
-                    />
-                ),
-            }}
-        />
-        <Tab.Screen
-            name={routes.LISTING_EDIT_SCREEN}
-            component={ListingEditScreen}
-            options={({ navigation }) => ({
-                tabBarButton: () => (
-                    <EditListingButton
-                        onPress={() =>
-                            navigation.navigate(routes.LISTING_EDIT_SCREEN)
-                        }
-                    />
-                ),
-            })}
-        />
-        <Tab.Screen
-            name="Account"
-            component={AccountNavigator}
-            options={{
-                tabBarIcon: ({ size, color }) => (
-                    <MaterialCommunityIcons
-                        name="account"
-                        size={size}
-                        color={color}
-                    />
-                ),
-            }}
-        />
-    </Tab.Navigator>
-);
+export default TabNavigator = () => {
+    useNotifications();
+
+    return (
+        <Tab.Navigator>
+            <Tab.Screen
+                name="Feed"
+                component={FeedNavigator}
+                options={{
+                    tabBarIcon: ({ size, color }) => (
+                        <MaterialCommunityIcons
+                            name="home"
+                            size={size}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+            <Tab.Screen
+                name={routes.LISTING_EDIT_SCREEN}
+                component={ListingEditScreen}
+                options={({ navigation }) => ({
+                    tabBarButton: () => (
+                        <EditListingButton
+                            onPress={() =>
+                                navigation.navigate(routes.LISTING_EDIT_SCREEN)
+                            }
+                        />
+                    ),
+                })}
+            />
+            <Tab.Screen
+                name="Account"
+                component={AccountNavigator}
+                options={{
+                    tabBarIcon: ({ size, color }) => (
+                        <MaterialCommunityIcons
+                            name="account"
+                            size={size}
+                            color={color}
+                        />
+                    ),
+                }}
+            />
+        </Tab.Navigator>
+    );
+};
