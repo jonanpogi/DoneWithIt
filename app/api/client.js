@@ -3,7 +3,7 @@ import { getToken } from "../auth/storage";
 import cache from "../utility/cache";
 
 // online
-const baseURL = "https://my-first-node-js-api.herokuapp.com/api";
+const baseURL = "http://bvtma.herokuapp.com/api";
 // ofline <replace the ip address with you ip address to test this locally
 // const baseURL = "http://192.168.0.105:9000/api";
 
