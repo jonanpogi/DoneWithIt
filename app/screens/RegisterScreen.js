@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import AppBlankScreen from "../components/AppBlankScreen";
 import {
     AppErrorMessage,
@@ -56,6 +56,11 @@ function RegisterScreen(props) {
                     onSubmit={handleSubmit}
                     validationSchema={validationSchema}
                 >
+                    <Image
+                        style={styles.logo}
+                        source={require(`../assets/logo-red.png`)}
+                    />
+
                     <AppErrorMessage error={error} visible={error !== null} />
 
                     <AppFormField
@@ -97,6 +102,13 @@ function RegisterScreen(props) {
 const styles = StyleSheet.create({
     container: {
         padding: 10,
+    },
+    logo: {
+        width: 80,
+        height: 80,
+        alignSelf: "center",
+        marginTop: 50,
+        marginBottom: 20,
     },
 });
 
