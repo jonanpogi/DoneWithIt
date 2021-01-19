@@ -7,6 +7,8 @@ import {
     Platform,
     View,
 } from "react-native";
+// usefull for different platform usage
+import Constant from "expo-constants";
 
 function AppKeyboardAvoidingView({ children, style }) {
     return (
@@ -24,6 +26,7 @@ function AppKeyboardAvoidingView({ children, style }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: Constant.statusBarHeight,
     },
     inner: {
         justifyContent: "flex-end",
