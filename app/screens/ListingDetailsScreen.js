@@ -1,34 +1,39 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, ScrollView } from "react-native";
 import AppText from "../components/AppText";
 import AppListItem from "../components/lists/AppListItem";
 import { Image } from "react-native-expo-image-cache";
 
 import colors from "../config/colors";
+import AppContactSellerForm from "../components/AppContactSellerForm";
+import AppKeyboardAvoidingView from "../components/AppKeyboardAvoidingView";
 
 function ListingDetailsScreen({ route }) {
     const { title, price, images } = route.params;
 
     return (
-        <View style={styles.container}>
-            <Image
-                style={styles.image}
-                uri={images[0].url}
-                preview={{ uri: images[0].thumbnailUrl }}
-                tint="light"
-            />
-            <View style={styles.detailsContainer}>
-                <AppText style={styles.title}>{title}</AppText>
-                <AppText style={styles.price}>{price}</AppText>
-                <View style={styles.userContainer}>
-                    <AppListItem
-                        image={require(`../assets/mosh.jpg`)}
-                        title="Jonan Bie"
-                        subTitle="5 Listings"
-                    />
+        <ScrollView>
+            <AppKeyboardAvoidingView style={styles.container}>
+                <Image
+                    style={styles.image}
+                    uri={images[0].url}
+                    preview={{ uri: images[0].thumbnailUrl }}
+                    tint="light"
+                />
+                <View style={styles.detailsContainer}>
+                    <AppText style={styles.title}>{title}</AppText>
+                    <AppText style={styles.price}>{price}</AppText>
+                    <View style={styles.userContainer}>
+                        <AppListItem
+                            image={require(`../assets/mosh.jpg`)}
+                            title="Jonan Bie"
+                            subTitle="5 Listings"
+                        />
+                    </View>
+                    <AppContactSellerForm listing={route.params} />
                 </View>
-            </View>
-        </View>
+            </AppKeyboardAvoidingView>
+        </ScrollView>
     );
 }
 
