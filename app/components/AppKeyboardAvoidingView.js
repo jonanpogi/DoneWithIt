@@ -11,7 +11,7 @@ import {
 function AppKeyboardAvoidingView({ children, style }) {
     return (
         <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "position" : null}
+            behavior={Platform.OS === "ios" ? "padding" : null}
             style={[styles.container, style]}
         >
             <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>

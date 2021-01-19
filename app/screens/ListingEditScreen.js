@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import AppBlankScreen from "../components/AppBlankScreen";
 import { StyleSheet } from "react-native";
 import {
     AppForm,
@@ -14,6 +13,7 @@ import AppCategoryPickerItem from "../components/AppCategoryPickerItem";
 import useLocation from "../hooks/useLocation";
 import listings from "../api/listings";
 import UploadScreen from "./UploadScreen";
+import AppKeyboardAvoidingView from "../components/AppKeyboardAvoidingView";
 
 const initialItems = [
     { label: "test1", value: 1, backgroundColor: "red", icon: "apps" },
@@ -51,7 +51,7 @@ function ListingEditScreen(props) {
     };
 
     return (
-        <AppBlankScreen style={styles.container}>
+        <AppKeyboardAvoidingView style={styles.container}>
             <UploadScreen
                 onDone={() => setUploadVisible(false)}
                 progress={progress}
@@ -107,13 +107,13 @@ function ListingEditScreen(props) {
 
                 <AppSubmitButton color={colors.primary} title="post" />
             </AppForm>
-        </AppBlankScreen>
+        </AppKeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        // backgroundColor: "firebrick",
+        padding: 10,
     },
 });
 

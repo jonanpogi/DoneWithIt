@@ -3,7 +3,6 @@ import { StyleSheet, Image } from "react-native";
 import colors from "../config/colors";
 import * as Yup from "yup";
 
-import AppBlankScreen from "../components/AppBlankScreen";
 import {
     AppForm,
     AppFormField,
@@ -14,6 +13,7 @@ import auth from "../api/auth";
 import useAuth from "../auth/useAuth";
 import useApi from "../hooks/useApi";
 import AppActivityIndicator from "../components/AppActivityIndicator";
+import AppKeyboardAvoidingView from "../components/AppKeyboardAvoidingView";
 
 const validationSchema = Yup.object().shape({
     email: Yup.string().required().email().label("Email"),
@@ -39,22 +39,21 @@ function LoginScreen(props) {
     return (
         <>
             <AppActivityIndicator visible={loginApi.loading} />
-            <AppBlankScreen style={styles.container}>
-                <Image
-                    style={styles.logo}
-                    source={require(`../assets/logo-red.png`)}
-                />
-
-                <AppErrorMessage
-                    error="Invalid email and/or password."
-                    visible={visible}
-                />
-
+            <AppKeyboardAvoidingView style={styles.container}>
                 <AppForm
                     initialValues={{ email: "", password: "" }}
                     onSubmit={handleSubmit}
                     validationSchema={validationSchema}
                 >
+                    <Image
+                        style={styles.logo}
+                        source={require(`../assets/logo-red.png`)}
+                    />
+
+                    <AppErrorMessage
+                        error="Invalid email and/or password."
+                        visible={visible}
+                    />
                     <AppFormField
                         autoCaptilize="none"
                         autoCorrect={false}
@@ -77,7 +76,7 @@ function LoginScreen(props) {
 
                     <AppSubmitButton title="submit" color={colors.primary} />
                 </AppForm>
-            </AppBlankScreen>
+            </AppKeyboardAvoidingView>
         </>
     );
 }

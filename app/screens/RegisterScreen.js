@@ -13,6 +13,7 @@ import auth from "../api/auth";
 import useAuth from "../auth/useAuth";
 import useApi from "../hooks/useApi";
 import AppActivityIndicator from "../components/AppActivityIndicator";
+import AppKeyboardAvoidingView from "../components/AppKeyboardAvoidingView";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required().label("Name"),
@@ -50,7 +51,7 @@ function RegisterScreen(props) {
             <AppActivityIndicator
                 visible={registerApi.loading || loginApi.loading}
             />
-            <AppBlankScreen style={styles.container}>
+            <AppKeyboardAvoidingView style={styles.container}>
                 <AppForm
                     initialValues={{ name: "", email: "", password: "" }}
                     onSubmit={handleSubmit}
@@ -94,7 +95,7 @@ function RegisterScreen(props) {
 
                     <AppSubmitButton title="register" color={colors.primary} />
                 </AppForm>
-            </AppBlankScreen>
+            </AppKeyboardAvoidingView>
         </>
     );
 }
